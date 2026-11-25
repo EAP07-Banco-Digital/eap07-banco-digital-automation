@@ -1,0 +1,54 @@
+plugins {
+	id 'io.github.jumosqu12.screenplayarchitecture' version '2.0.1'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '5.4.2'
+	id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+group 'co.edu.udea.eap07.certificacion'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '5.4.2'
+    lombokVersion = '1.18.36'
+    junit = '4.13.2'
+    hamcrest = '1.3'
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}"
+    implementation 'org.slf4j:slf4j-simple:2.0.16'
+
+    // Test compilation
+    testImplementation "junit:junit:${junit}"
+    testImplementation "org.hamcrest:hamcrest-all:${hamcrest}"
+
+    // Additional library
+    implementation 'org.apache.commons:commons-dbcp2:2.13.0'
+}
+
+tasks.named('test') {
+    def cucumberTags = System.getProperty('cucumber.filter.tags')
+    if (cucumberTags) {
+        systemProperty 'cucumber.filter.tags', cucumberTags
+    }
+
+    def cucumberName = System.getProperty('cucumber.filter.name')
+    if (cucumberName) {
+        systemProperty 'cucumber.filter.name', cucumberName
+    }
+}
