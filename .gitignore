@@ -15,7 +15,6 @@ serenity-reports/
 .classpath
 .project
 .settings/
-bin/
 out/
 
 # Sistema operativo
@@ -24,3 +23,12 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Variables y credenciales locales
+.env
+.env.*
+!.env.example
+.credentials/
+*.secret
+*.secrets
+*.credentials.local
