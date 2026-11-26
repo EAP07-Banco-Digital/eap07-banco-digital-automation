@@ -41,7 +41,29 @@ dependencies {
     implementation 'org.apache.commons:commons-dbcp2:2.13.0'
 }
 
+def serenityOutputDirectory = providers.gradleProperty('serenityOutputDirectory')
+        .orElse('target/site/serenity')
+        .get()
+def serenityOutputPath = project.file(serenityOutputDirectory).absolutePath
+
+System.setProperty('project.build.directory', serenityOutputPath)
+System.setProperty('serenity.outputDirectory', serenityOutputPath)
+
+serenity {
+    outputDirectory = serenityOutputDirectory
+    generateOutcomes = true
+}
+
 tasks.named('test') {
+    systemProperty 'project.build.directory', serenityOutputPath
+    systemProperty 'serenity.outputDirectory', serenityOutputPath
+
+    doFirst {
+        delete project.file(serenityOutputDirectory)
+    }
+
+    finalizedBy(tasks.named('aggregate'))
+
     def cucumberTags = System.getProperty('cucumber.filter.tags')
     if (cucumberTags) {
         systemProperty 'cucumber.filter.tags', cucumberTags
