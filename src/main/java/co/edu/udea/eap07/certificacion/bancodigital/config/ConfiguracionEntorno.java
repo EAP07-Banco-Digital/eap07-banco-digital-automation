@@ -10,11 +10,11 @@ public final class ConfiguracionEntorno {
 
     private static final String DEFAULT_BASE_URL =
             "https://eap07-banco-digital-backend.onrender.com";
-    private static final int DEFAULT_HTTP_CONNECT_TIMEOUT_MS = 10_000;
+    private static final int DEFAULT_HTTP_CONNECT_TIMEOUT_MS = 15_000;
     private static final int DEFAULT_HTTP_READ_TIMEOUT_MS = 30_000;
     private static final int DEFAULT_WARMUP_MAX_ATTEMPTS = 5;
-    private static final int DEFAULT_WARMUP_RETRY_DELAY_MS = 10_000;
-    private static final int DEFAULT_WARMUP_READ_TIMEOUT_MS = 60_000;
+    private static final int DEFAULT_WARMUP_RETRY_DELAY_MS = 15_000;
+    private static final int DEFAULT_WARMUP_READ_TIMEOUT_MS = 120_000;
 
     private final String baseUrl;
     private final int httpConnectTimeoutMs;
