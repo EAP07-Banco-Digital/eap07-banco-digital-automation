@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "co.edu.udea.eap07.certificacion.bancodigital.stepdefinitions",
+        glue = "co.edu.udea.eap07.certificacion.bancodigital",
+        tags = "not @technical-local",
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 public class Runner {}
